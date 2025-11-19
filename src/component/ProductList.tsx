@@ -2,8 +2,9 @@ import { ProductsType } from "@/type";
 import React from "react";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
 
-const ProductList = () => {
+const ProductList = ({ category }: { category: string }) => {
   const products: ProductsType = [
     {
       id: 1,
@@ -119,11 +120,18 @@ const ProductList = () => {
     <div className='w-full'>
       <Categories />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 gap-8'>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      <Link
+        href={category ? `/products/?category?=${category}` : "/products"}
+        className='flex justify-end underline mt-6 text-gray-600'
+      >
+        {" "}
+        View all Products
+      </Link>
     </div>
   );
 };
